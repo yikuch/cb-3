@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "minako.h"
 
-//basis funktionen
+//basis funktionen, zum Auflösen der Zeichen
 void eat(void);
 int isToken(int);
 void isTokenAndEat(int);
@@ -16,7 +16,7 @@ void block(void);
 void statement(void);
 void ifstatement(void);
 void returnstatement(void);
-void t_printf(void);
+void tok_printf(void);
 void type(void);
 void statassignment(void);
 void assignment(void);
@@ -115,7 +115,7 @@ void statement(void) {
         case KW_RETURN:
             returnstatement(); isTokenAndEat(';'); break;
         case KW_PRINTF:
-            t_printf(); isTokenAndEat(';'); break;
+            tok_printf(); isTokenAndEat(';'); break;
         case ID:
             if (nextToken == '=') {
                 statassignment(); isTokenAndEat(';');
@@ -149,7 +149,7 @@ void returnstatement(void) {
     
 }
 
-void t_printf(void) {
+void tok_printf(void) {
     isTokenAndEat(KW_PRINTF);
     isTokenAndEat('('); assignment(); isTokenAndEat(')');
 }
